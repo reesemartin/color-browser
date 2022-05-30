@@ -1,0 +1,15 @@
+{
+  "short_name": "Color Browser",
+  "name": "Color Browser",
+  "icons": [
+    {
+      "src": "logo.png",
+      "type": "image/png",
+      "sizes": "600x600"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
