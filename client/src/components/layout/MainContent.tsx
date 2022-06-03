@@ -12,6 +12,7 @@ const MainContent = () => {
           <Routes>
             <Route path="/" element={<Search />} />
             <Route path="/color/:colorHex" element={<ColorDetail />} />
+            <Route path="/family/:family" element={<Search />} />
             <Route path="*" element={<Search />} />
           </Routes>
         </div>

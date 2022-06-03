@@ -61,7 +61,7 @@ export const ColorSchema = {
 
 /*
 {
-  colors(limit: 12, offset: 0) {
+  colors(limit: 12, offset: 0, family: null) {
     hex
     hue
     family {
@@ -76,18 +76,27 @@ export const ColorsSchema = {
   args: {
     limit: { type: GraphQLInt },
     offset: { type: GraphQLInt },
+    family: { type: GraphQLString },
+    term: { type: GraphQLString },
   },
-  resolve: (parent, args) =>
-    colors.slice(
+  resolve: (parent, args) => {
+    console.log(args.term)
+    const filteredColors = colors.filter(color => (!args.family || color.family === args.family) && (!args.term || color.hex.toLowerCase().indexOf(args.term.toLowerCase()) !== -1))
+    return filteredColors.slice(
       args.offset ? args.offset : 0,
       args.limit ? args.limit + (args.offset ? args.offset : 0) : colors.length
-    ),
+    )
+  },
 }
 
 export const ColorsTotalSchema = {
   type: GraphQLInt,
   description: 'Total of all colors',
-  resolve: () => colors.length,
+  args: {
+    family: { type: GraphQLString },
+    term: { type: GraphQLString },
+  },
+  resolve: (parent, args) => colors.filter(color => (!args.family || color.family === args.family) && (!args.term || color.hex.toLowerCase().indexOf(args.term.toLowerCase()) !== -1)).length,
 }
 
 /*

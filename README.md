@@ -16,11 +16,9 @@ Initially branded for a demo with Helpful Human
   - Detail page for each color
   - Button to automatically select a random color
   - Fully responsive design
-
-- WIP
-  - **Side navigation color family links** Add route and utilize existing color family query to display colors based on family
-  - **Search input** Add query for searching colors and hook up to the search input
-  - **Add tints/shades in detail view** Use the existing property on the color detail page's currently selected color object
+  - Side navigation color family links
+  - Search input
+  - Add tints/shades in detail view
 
 
 ## Install

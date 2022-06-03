@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { Color, getColor } from '../model/colors'
 import { Loading } from '../components/Loading'
 import { CustomButton } from '../components/CustomButton'
+import ColorCard from '../components/ColorCard'
 
 type MainColorCardProps = {
   color: Color
@@ -48,12 +49,19 @@ const ColorDetail: React.FC = () => {
       {!error.length && !loading && color && (
         <div>
           <MainColorCard color={color} />
+          <div className="flex flex-wrap justify-center gap-4 sm:gap-x-12 sm:gap-y-6 my-6">
+            {color.family?.colors
+              ?.filter((siblingColor) => siblingColor.hex !== color.hex && siblingColor.hue === color.hue)
+              .map((siblingColor) => (
+                <ColorCard key={siblingColor.hex + siblingColor.hue} color={siblingColor} className="inline-block" />
+              ))}
+          </div>
           <CustomButton
-                onClick={() => {
-                  navigate(`/`)
-                }}
-                className="w-auto m-auto mt-8 px-16">
-                Clear
+            onClick={() => {
+              navigate(`/`)
+            }}
+            className="w-auto m-auto mt-8 px-16">
+            Clear
           </CustomButton>
         </div>
       )}

@@ -29,12 +29,14 @@ export const getAPIURL = () => {
 export const listColors = async (
   limit: number = 12,
   offset: number = 0,
-  hexOnly: boolean = false
+  hexOnly: boolean = false,
+  family: string | undefined | null = null,
+  term: string | undefined = ""
 ): Promise<ColorResults> => {
   const query = {
     operationName: 'listColors',
-    query: `query listColors($limit: Int!, $offset: Int!) {
-        colors(limit: $limit, offset: $offset) {
+    query: `query listColors($limit: Int!, $offset: Int!, $family: String, $term: String) {
+        colors(limit: $limit, offset: $offset, family: $family, term: $term) {
           hex
           ${
             hexOnly
@@ -47,11 +49,13 @@ export const listColors = async (
               `
           }
         }
-        colorsTotal
+        colorsTotal(family: $family, term: $term)
       }`,
     variables: {
       limit,
       offset,
+      family,
+      term,
     },
   }
   const response = await axios({
